@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { toast } from 'react-toastify';
 import DataTable from '../../components/DataTable';
 import './styles/DoctorLabResultsPage.css';
+
+// Sample lab results data - in a real app, this would come from an API
+const labResults = [
+  { id: 1, patientName: 'John Doe', testType: 'Blood Test', date: '2023-05-15', status: 'Normal', details: 'All values within normal range.' },
+  { id: 2, patientName: 'Jane Smith', testType: 'Urine Analysis', date: '2023-05-10', status: 'Urgent', details: 'Elevated protein levels, requires immediate attention.' },
+  { id: 3, patientName: 'Mike Johnson', testType: 'Cholesterol Panel', date: '2023-05-05', status: 'Abnormal', details: 'High LDL cholesterol, follow-up required.' },
+  { id: 4, patientName: 'Sarah Williams', testType: 'Blood Glucose', date: '2023-04-28', status: 'Normal', details: 'Blood sugar levels within target range.' },
+  { id: 5, patientName: 'Tom Brown', testType: 'Thyroid Function', date: '2023-04-20', status: 'Abnormal', details: 'TSH levels indicate hypothyroidism.' },
+  { id: 6, patientName: 'Lisa Davis', testType: 'Complete Blood Count', date: '2023-04-15', status: 'Urgent', details: 'Low hemoglobin, possible anemia, urgent follow-up needed.' }
+];
 
 function DoctorLabResultsPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -9,16 +18,6 @@ function DoctorLabResultsPage() {
   const [patientFilter, setPatientFilter] = useState('');
   const [testTypeFilter, setTestTypeFilter] = useState('');
   const [filteredResults, setFilteredResults] = useState([]);
-
-  // Sample lab results data - in a real app, this would come from an API
-  const labResults = [
-    { id: 1, patientName: 'John Doe', testType: 'Blood Test', date: '2023-05-15', status: 'Normal', details: 'All values within normal range.' },
-    { id: 2, patientName: 'Jane Smith', testType: 'Urine Analysis', date: '2023-05-10', status: 'Urgent', details: 'Elevated protein levels, requires immediate attention.' },
-    { id: 3, patientName: 'Mike Johnson', testType: 'Cholesterol Panel', date: '2023-05-05', status: 'Abnormal', details: 'High LDL cholesterol, follow-up required.' },
-    { id: 4, patientName: 'Sarah Williams', testType: 'Blood Glucose', date: '2023-04-28', status: 'Normal', details: 'Blood sugar levels within target range.' },
-    { id: 5, patientName: 'Tom Brown', testType: 'Thyroid Function', date: '2023-04-20', status: 'Abnormal', details: 'TSH levels indicate hypothyroidism.' },
-    { id: 6, patientName: 'Lisa Davis', testType: 'Complete Blood Count', date: '2023-04-15', status: 'Urgent', details: 'Low hemoglobin, possible anemia, urgent follow-up needed.' }
-  ];
 
   // Unique values for filters
   const patients = [...new Set(labResults.map(result => result.patientName))];

@@ -11,14 +11,7 @@ const PrivateRoute = ({ children, allowedRoles }) => {
     ? rawUserRole.substring(5).toUpperCase()
     : rawUserRole?.toUpperCase();
 
-  console.log('[PrivateRoute] Current Location:', location.pathname);
-  console.log('[PrivateRoute] isAuthenticated:', isAuthenticated);
-  console.log('[PrivateRoute] rawUserRole from localStorage:', rawUserRole);
-  console.log('[PrivateRoute] processedUserRole for check:', processedUserRole);
-  console.log('[PrivateRoute] allowedRoles:', allowedRoles);
-
   if (!isAuthenticated) {
-    console.log('[PrivateRoute] Not authenticated, redirecting to /login');
     // Redirect to login if not authenticated
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
@@ -27,7 +20,7 @@ const PrivateRoute = ({ children, allowedRoles }) => {
   const upperAllowedRoles = allowedRoles.map(role => role.toUpperCase());
 
   if (allowedRoles && !upperAllowedRoles.includes(processedUserRole)) {
-    console.log(`[PrivateRoute] Role mismatch: processedUserRole \"${processedUserRole}\" not in allowedRoles [${upperAllowedRoles.join(', ')}]. Redirecting to /unauthorized`);
+    console.log(`[PrivateRoute] Role mismatch: processedUserRole "${processedUserRole}" not in allowedRoles [${upperAllowedRoles.join(', ')}]. Redirecting to /unauthorized`);
     // Redirect to unauthorized or home page if role doesn't match
     return <Navigate to="/unauthorized" replace />;
   }

@@ -59,10 +59,10 @@ export default function EmergencyDashboardOverview() {
   ];
   
   const quickActionsData = [
-    { label: 'Register New Patient', icon: <PatientsIcon />, onClick: () => console.log('Register New Patient'), variant: 'primary'},
-    { label: 'View Triage Queue', icon: <AlertIcon />, onClick: () => console.log('View Triage Queue'), variant: 'secondary'},
-    { label: 'Request Medical Team', icon: <EmergencyIcon />, onClick: () => console.log('Request Medical Team'), variant: 'secondary'},
-    { label: 'Update ER Status', icon: <UserIcon />, onClick: () => console.log('Update ER Status'), variant: 'secondary'}, // TODO: Better icon
+    { label: 'Register New Patient', icon: <PatientsIcon />, onClick: () => {}, variant: 'primary'},
+    { label: 'View Triage Queue', icon: <AlertIcon />, onClick: () => {}, variant: 'secondary'},
+    { label: 'Request Medical Team', icon: <EmergencyIcon />, onClick: () => {}, variant: 'secondary'},
+    { label: 'Update ER Status', icon: <UserIcon />, onClick: () => {}, variant: 'secondary'}, // TODO: Better icon
   ];
 
   return (

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Button from '../ui/Button';
 
-export default function EditInsuranceForm({ initialData, onSave, onCancel, isLoading, formId }) {
+export default function EditInsuranceForm({ initialData, onSave, isLoading, formId }) {
   const [formData, setFormData] = useState({
     provider: '',
     policyId: '',

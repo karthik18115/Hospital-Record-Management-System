@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef, createContext, useContext } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link, Outlet } from 'react-router-dom'; // Import Outlet
+import { AppointmentContext } from '../context/AppointmentContext';
 import CustomButton from '../components/ui/Button';
 import CustomUICard from '../components/ui/Card';
 // Import centralized icons
@@ -14,20 +15,6 @@ import {
 } from '../components/icons'; // Adjusted path
 import { toast } from 'react-toastify'; // For handleBookAppointment
 
-// Create a context for appointments
-const AppointmentContext = createContext();
-
-// Custom hook to use the appointment context
-export const useAppointments = () => useContext(AppointmentContext);
-
-// Remove the individual dashboard content components from this file
-// const PatientDashboardContent = () => { ... }; 
-// const DoctorDashboardContent = () => { ... };
-// const EmergencyDoctorDashboardContent = () => { ... };
-// const LabCenterDashboardContent = () => { ... };
-// const PharmacyAdminDashboardContent = () => { ... };
-// const AdminDashboardContent = () => { ... };
-// const DefaultDashboardContent = () => { ... };
 
 // Keep getSidebarLinks for now, will adjust paths later
 const getSidebarLinks = (role) => {
@@ -97,7 +84,7 @@ const getSidebarLinks = (role) => {
 
 function HomePage() {
   const [userRole, setUserRole] = useState(null);
-  const [userName, setUserName] = useState('User');
+  const [userName] = useState('User');
   const navigate = useNavigate();
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);

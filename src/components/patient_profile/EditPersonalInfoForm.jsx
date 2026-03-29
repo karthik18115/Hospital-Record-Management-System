@@ -16,7 +16,7 @@ const LANGUAGE_OPTIONS = [
   // Add more languages as needed
 ];
 
-export default function EditPersonalInfoForm({ initialData, onSave, onCancel, isLoading, formId }) {
+export default function EditPersonalInfoForm({ initialData, onSave, isLoading, formId }) {
   const [formData, setFormData] = useState({
     fullName: '',
     dateOfBirth: '', // Expects YYYY-MM-DD

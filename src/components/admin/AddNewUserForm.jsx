@@ -11,7 +11,7 @@ const isNonPatientProfessional = (role) => {
   return role && role !== 'Patient';
 };
 
-export default function AddNewUserForm({ onSave, onCancel, isLoading, formId }) {
+export default function AddNewUserForm({ onSave, isLoading, formId }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [role, setRole] = useState(ALL_USER_ROLES[0]); // Default to the first role

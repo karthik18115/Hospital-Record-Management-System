@@ -27,7 +27,6 @@ export default function Button({
   children, 
   to = null, // Add 'to' prop for NavLink functionality
   activeClassName = '', // Add activeClassName prop
-  isLoading, // Destructure isLoading here
   ...props 
 }) {
   const variantClass = VARIANTS[variant] || VARIANTS.primary;

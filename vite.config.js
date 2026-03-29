@@ -1,3 +1,4 @@
+/* global process */
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
@@ -8,7 +9,7 @@ export default defineConfig({
     force: true, // Attempt to bust caches
     proxy: {
       '/api': {
-        target: 'http://localhost:8081',
+        target: process.env.VITE_API_BASE_URL || 'http://localhost:8081',
         changeOrigin: true,
         secure: false,
       },

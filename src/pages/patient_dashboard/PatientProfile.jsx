@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context/useAuth';
 import EmergencyContactDisplay from '../../components/dashboard_shared/EmergencyContactDisplay';
 import Card from '../../components/ui/Card';
 import Button from '../../components/ui/Button';
@@ -215,6 +215,14 @@ export default function PatientProfile() {
       toast.success('Emergency contacts updated (mock save)!');
     }, 1000);
   };
+
+  if (isLoading) {
+    return <div className="p-6 text-center text-slate-600">Loading profile...</div>;
+  }
+
+  if (error) {
+    return <div className="p-6 text-center text-red-600">{error}</div>;
+  }
 
   return (
     <div className="p-4 md:p-6 lg:p-8 space-y-8 bg-slate-100 min-h-full">

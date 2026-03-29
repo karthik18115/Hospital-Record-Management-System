@@ -18,7 +18,7 @@ import {
   Legend,
 } from 'chart.js';
 import usePatientData from '../../hooks/usePatientData';
-import { useAppointments } from '../HomePage';
+import { useAppointments } from '../../context/AppointmentContext';
 import {
   CalendarIcon as AppointmentIcon,
   LabIcon,

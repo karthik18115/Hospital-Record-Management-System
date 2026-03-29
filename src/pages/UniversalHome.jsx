@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import CustomButton from '../components/ui/Button';
 
 // Hero section image
@@ -67,30 +67,30 @@ const testimonials = [
 ];
 
 // Helper function to determine dashboard route based on user role
-const getDashboardRoute = (role) => {
-  switch (role?.toLowerCase()) {
-    case 'admin':
-      return '/admin/overview';
-    case 'patient':
-      return '/app/patient/dashboard';
-    case 'doctor':
-      return '/app/doctor/dashboard';
-    case 'pharmacy':
-      return '/app/pharmacy/dashboard';
-    case 'labcenter':
-      return '/app/labcenter/dashboard';
-    case 'emergency':
-      return '/app/emergency/dashboard';
-    default:
-      return '/';
-  }
-};
+// const getDashboardRoute = (role) => {
+//   switch (role?.toLowerCase()) {
+//     case 'admin':
+//       return '/admin/overview';
+//     case 'patient':
+//       return '/app/patient/dashboard';
+//     case 'doctor':
+//       return '/app/doctor/dashboard';
+//     case 'pharmacy':
+//       return '/app/pharmacy/dashboard';
+//     case 'labcenter':
+//       return '/app/labcenter/dashboard';
+//     case 'emergency':
+//       return '/app/emergency/dashboard';
+//     default:
+//       return '/';
+//   }
+// };
 
 export default function UniversalHome() {
-  const navigate = useNavigate();
-  const token = localStorage.getItem('authToken');
-  const role = localStorage.getItem('userRole');
-  const isLoggedIn = !!token && !!role;
+  // const navigate = useNavigate();
+  // const token = localStorage.getItem('authToken');
+  // const role = localStorage.getItem('userRole');
+  // const isLoggedIn = !!token && !!role;
   
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [contactForm, setContactForm] = useState({

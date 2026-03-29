@@ -29,7 +29,7 @@ function DoctorPatientQueue() {
   const [selectedPriority, setSelectedPriority] = useState('All');
   const [selectedStatus, setSelectedStatus] = useState('All');
   const [sortBy, setSortBy] = useState('admissionTime');
-  const [sortOrder, setSortOrder] = useState('asc');
+  const [sortOrder] = useState('asc');
 
   useEffect(() => {
     setIsLoading(true);

@@ -25,7 +25,7 @@ const mockLabData = {
 };
 
 export default function LabCenterDashboardOverview() {
-  const [data, setData] = useState(mockLabData);
+  const [data] = useState(mockLabData);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -61,10 +61,10 @@ export default function LabCenterDashboardOverview() {
   ];
   
   const quickActionsData = [
-    { label: 'Log New Sample', icon: <LabIcon />, onClick: () => console.log('Log New Sample'), variant: 'primary'},
-    { label: 'View Pending Requests', icon: <ReportIcon />, onClick: () => console.log('View Pending Requests'), variant: 'secondary'},
-    { label: 'Enter Test Results', icon: <NotesIcon />, onClick: () => console.log('Enter Test Results'), variant: 'secondary'},
-    { label: 'Equipment Log', icon: <CogIcon />, onClick: () => console.log('Equipment Maintenance Log'), variant: 'secondary'},
+    { label: 'Log New Sample', icon: <LabIcon />, onClick: () => {}, variant: 'primary'},
+    { label: 'View Pending Requests', icon: <ReportIcon />, onClick: () => {}, variant: 'secondary'},
+    { label: 'Enter Test Results', icon: <NotesIcon />, onClick: () => {}, variant: 'secondary'},
+    { label: 'Equipment Log', icon: <CogIcon />, onClick: () => {}, variant: 'secondary'},
   ];
 
   return (

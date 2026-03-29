@@ -4,13 +4,13 @@ import TabSwitcher from '../../components/TabSwitcher';
 import Card from '../../components/ui/Card';
 import Button from '../../components/ui/Button';
 import { CalendarIcon, PlusIcon } from '../../components/icons';
-import { useAppointments } from '../HomePage';
+import { useAppointments } from '../../context/AppointmentContext';
 
 export default function PatientAppointments() {
   const [activeTab, setActiveTab] = useState('upcoming');
   const [isModalOpen, setIsModalOpen] = useState(false);
   
-  const { appointments, handleBookAppointment, setAppointments } = useAppointments();
+  const { appointments, handleBookAppointment } = useAppointments();
 
   const localHandleBookAppointment = (appointmentDetails) => {
     handleBookAppointment(appointmentDetails);

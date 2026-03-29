@@ -2,11 +2,18 @@ package com.medirec.entity;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "appointments")
+@Table(name = "appointments", indexes = {
+    @Index(name = "idx_appointment_patient_uuid", columnList = "patient_uuid"),
+    @Index(name = "idx_appointment_doctor_uuid", columnList = "doctor_uuid"),
+    @Index(name = "idx_appointment_datetime", columnList = "appointmentDateTime"),
+    @Index(name = "idx_appointment_status", columnList = "status")
+})
 public class Appointment {
 
     @Id
@@ -30,10 +37,16 @@ public class Appointment {
     @Column(columnDefinition = "TEXT")
     private String notes;
 
-    @Column(nullable = true) // Assuming status can be initially null or set to a default
-    private String status; // e.g., "Pending Confirmation", "Confirmed", "Completed", "Cancelled"
+    @Column(nullable = true)
+    private String status;
 
-    // Status, notes, createdAt, etc. can be added later
+    @CreationTimestamp
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(nullable = false)
+    private LocalDateTime updatedAt;
 
     // Getters and setters
     public UUID getUuid() { return uuid; }
@@ -56,4 +69,10 @@ public class Appointment {
 
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+
+    public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
 } 

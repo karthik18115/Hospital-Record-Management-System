@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useAuth } from '../context/AuthContext'; // Assuming AuthContext provides getToken()
+import { useAuth } from '../context/useAuth'; // Assuming AuthContext provides getToken()
 
 // --- MOCK DATA --- 
 const MOCK_PATIENT_DATA = {

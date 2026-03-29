@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import CustomButton from '../../components/ui/Button';
 import { PaperAirplaneIcon, UserCircleIcon, MagnifyingGlassIcon, ChatBubbleLeftEllipsisIcon } from '../../components/icons';
 import useDoctorMessages from '../../hooks/useDoctorMessages';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context/useAuth';
 // No longer directly import sendMessage from doctorService, hook handles it
 // import { toast } from 'react-toastify'; // toast is used by the hook
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import SidebarNav from './doctor_dashboard/components/SidebarNav';
 import DashboardNavbar from '../components/DashboardNavbar'; // Corrected path
-import { useAuth } from '../context/AuthContext'; // Import useAuth
+import { useAuth } from '../context/useAuth'; // Import useAuth
 import './DoctorDashboardPage.css';
 
 // Placeholder Icons (can be replaced with actual icons later)

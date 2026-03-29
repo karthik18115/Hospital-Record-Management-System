@@ -2,12 +2,19 @@ package com.medirec.entity;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "prescriptions")
+@Table(name = "prescriptions", indexes = {
+    @Index(name = "idx_prescription_patient", columnList = "patient_uuid"),
+    @Index(name = "idx_prescription_doctor", columnList = "doctor_uuid"),
+    @Index(name = "idx_prescription_date", columnList = "prescription_date"),
+    @Index(name = "idx_prescription_status", columnList = "status")
+})
 public class Prescription {
 
     @Id
@@ -40,14 +47,25 @@ public class Prescription {
     private LocalDate startDate;
 
     @Column(name = "end_date")
-    private LocalDate endDate; // Optional
+    private LocalDate endDate;
 
     @Lob
     @Column(name = "notes")
-    private String notes; // Optional
+    private String notes;
 
     @Column(name = "prescription_date", nullable = false)
     private LocalDateTime prescriptionDate;
+
+    @Column(name = "status")
+    private String status;
+
+    @CreationTimestamp
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(nullable = false)
+    private LocalDateTime updatedAt;
 
     // Constructors
     public Prescription() {
@@ -132,6 +150,30 @@ public class Prescription {
 
     public void setPrescriptionDate(LocalDateTime prescriptionDate) {
         this.prescriptionDate = prescriptionDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @PrePersist

@@ -56,7 +56,6 @@ const mockRecentLogs = [
  */
 export const getDashboardSummaryStats = async () => {
   if (USE_MOCK_DATA) {
-    console.log('[Mock Service] Fetching dashboard summary stats');
     return new Promise(resolve => setTimeout(() => resolve(mockSummaryStats), 500));
   }
   const response = await fetch(`${API_BASE_URL}/admin/dashboard/summary-stats`, {
@@ -72,7 +71,6 @@ export const getDashboardSummaryStats = async () => {
  */
 export const getDashboardUserRoleStats = async () => {
   if (USE_MOCK_DATA) {
-    console.log('[Mock Service] Fetching user role stats');
     return new Promise(resolve => setTimeout(() => resolve(mockUserRoleStats), 500));
   }
   const response = await fetch(`${API_BASE_URL}/admin/dashboard/user-role-stats`, {
@@ -89,7 +87,6 @@ export const getDashboardUserRoleStats = async () => {
  */
 export const getDashboardRecentLogs = async (limit = 5) => {
   if (USE_MOCK_DATA) {
-    console.log(`[Mock Service] Fetching ${limit} recent logs`);
     return new Promise(resolve => setTimeout(() => resolve(mockRecentLogs.slice(0, limit)), 500));
   }
   const response = await fetch(`${API_BASE_URL}/admin/dashboard/recent-logs?limit=${limit}`, {

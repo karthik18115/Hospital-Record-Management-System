@@ -102,12 +102,12 @@ function DoctorDashboardOverview() {
     if (!dateString) return 'N/A';
     try {
         return new Date(dateString).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
-    } catch (e) {
+    } catch {
         return dateString;
     }
   };
 
-  const isLoading = isLoadingDashboard || isLoadingPatients;
+  // const isLoading = isLoadingDashboard || isLoadingPatients;
 
   if (dashboardError && patientsError) {
     return (

@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 
 export default function PatientPrescriptions() {
   const [activeTab, setActiveTab] = useState('active');
-  const [isLoading, setIsLoading] = useState(false); // Set to true for skeleton view
+  const [isLoading] = useState(false); // Set to true for skeleton view
 
   const tabs = [
     { id: 'active', label: 'Active Prescriptions' },

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Button from '../ui/Button';
 import { XIcon } from '../icons';
 
-export default function EditEmergencyContactsForm({ initialContacts, onSave, onCancel, isLoading, formId }) {
+export default function EditEmergencyContactsForm({ initialContacts, onSave, isLoading, formId }) {
   const [contacts, setContacts] = useState([]);
   
   const [newName, setNewName] = useState('');
@@ -57,7 +57,6 @@ export default function EditEmergencyContactsForm({ initialContacts, onSave, onC
   };
 
   const inputClass = "w-full px-3 py-1.5 rounded-md bg-slate-50 text-slate-700 border border-slate-300 focus:ring-teal-500 focus:border-teal-500 placeholder-slate-400 text-sm";
-  const labelClass = "block text-sm font-medium text-slate-700 mb-1";
   const errorClass = "text-red-600 text-xs mt-1";
   const subHeaderClass = "text-md font-semibold text-slate-700 mb-2 mt-4";
 

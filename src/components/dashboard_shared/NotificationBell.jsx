@@ -5,7 +5,7 @@ import './NotificationBell.css';
 // Placeholder for a Bell icon (e.g., from react-icons)
 const BellIcon = () => <span>🔔</span>;
 
-function NotificationBell({ unreadCount }) {
+function NotificationBell() {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
 
   // Placeholder notifications

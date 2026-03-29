@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/useAuth';
 import {
   getDoctorMessageContacts, // To be created in doctorService
   getMessagesForContact,    // To be created in doctorService
@@ -112,7 +112,7 @@ function useDoctorMessages() {
     } finally {
       setSendingMessage(false);
     }
-  }, [selectedContactId, user, messagesByContactId]); // messagesByContactId was missing
+  }, [selectedContactId, user]);
 
   const currentMessages = messagesByContactId[selectedContactId] || [];
 

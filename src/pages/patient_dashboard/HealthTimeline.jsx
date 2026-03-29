@@ -12,7 +12,7 @@ import {
 // import './HealthTimeline.css'; // Removed CSS import
 
 export default function HealthTimeline() {
-  const [isLoading, setIsLoading] = useState(false); // Set true for skeleton
+  const [isLoading] = useState(false);
 
   // Mock data - enhance with more detail or structure if needed
   const timelineEvents = [

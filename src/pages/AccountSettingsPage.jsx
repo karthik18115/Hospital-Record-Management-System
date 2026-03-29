@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import ToggleSwitch from '../components/ui/ToggleSwitch';
-import { useTheme } from '../contexts/ThemeContext'; // Import useTheme
+import { useTheme } from '../context/useTheme'; // Import useTheme
 
 function AccountSettingsPage() {
   const { theme, toggleTheme } = useTheme(); // Use theme from context
@@ -11,7 +11,6 @@ function AccountSettingsPage() {
   // State for mock settings
   const [passwordData, setPasswordData] = useState({ currentPassword: '', newPassword: '', confirmPassword: '' });
   const [notifications, setNotifications] = useState({ email: true, sms: false });
-  // const [theme, setTheme] = useState('light'); // Remove local theme state
   const [isSavingPassword, setIsSavingPassword] = useState(false);
   const [isSavingNotifications, setIsSavingNotifications] = useState(false);
 
@@ -36,7 +35,6 @@ function AccountSettingsPage() {
     }
     // Simulate API call
     setTimeout(() => {
-      console.log('Simulating password change:', passwordData);
       toast.success('Password changed successfully!');
       setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' }); // Clear fields
       setIsSavingPassword(false);
@@ -49,19 +47,10 @@ function AccountSettingsPage() {
     setNotifications(newSettings);
     // Simulate API call
     setTimeout(() => {
-      console.log('Simulating notification settings save:', newSettings);
       toast.success('Notification settings saved.');
       setIsSavingNotifications(false);
     }, 800);
   };
-
-  // const handleThemeChange = () => { // Remove local theme handler
-  //   const newTheme = theme === 'light' ? 'dark' : 'light';
-  //   setTheme(newTheme);
-  //   // TODO: Implement actual theme switching logic (e.g., adding/removing class on body)
-  //   console.log('Simulating theme change to:', newTheme);
-  //   toast.info(`Theme switched to ${newTheme} mode (visuals pending).`);
-  // };
 
   const inputClass = "w-full px-3 py-2 rounded-md bg-slate-50 dark:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-600 focus:ring-teal-500 focus:border-teal-500 placeholder-slate-400 dark:placeholder-slate-500 disabled:opacity-50";
   const labelClass = "block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1";

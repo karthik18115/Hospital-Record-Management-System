@@ -5,7 +5,7 @@ import { XIcon, PlusIcon } from '../icons'; // Assuming PlusIcon exists or can b
 const ALLERGY_SEVERITIES = ['Mild', 'Medium', 'High', 'Unknown'];
 const BLOOD_GROUPS = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-', 'Unknown'];
 
-export default function EditMedicalInfoForm({ initialData, onSave, onCancel, isLoading, formId }) {
+export default function EditMedicalInfoForm({ initialData, onSave, isLoading, formId }) {
   const [bloodGroup, setBloodGroup] = useState('');
   const [allergies, setAllergies] = useState([]); // Will store { id: string, name: string, severity: string }
   const [chronicConditions, setChronicConditions] = useState([]); // Will store { id: string, name: string }

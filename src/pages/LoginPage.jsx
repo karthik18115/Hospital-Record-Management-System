@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, Outlet } from 'react-router-dom';
 import CustomButton from '../components/ui/Button';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/useAuth';
 
 const LOGIN_IMAGE_URL = 'https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80';
 
@@ -100,9 +100,7 @@ function LoginPage() {
             setTwoFactorRequired(true);
             setGeneralError(data.message);
           } else {
-            console.log('Login API response data:', data);
             const determinedPath = getDashboardPath(data.role);
-            console.log(`Login role from API: "${data.role}", Processed role for path: "${data.role?.toUpperCase().startsWith('ROLE_') ? data.role.substring(5).toLowerCase() : data.role?.toLowerCase()}", Determined path: "${determinedPath}"`);
             
             const userData = {
               token: data.token,
@@ -290,7 +288,7 @@ function LoginPage() {
             </div>
             
             {/* Development Quick Login Buttons */}
-            {process.env.NODE_ENV === 'development' && (
+            {import.meta.env.NODE_ENV === 'development' && (
               <div className="mt-8 pt-6 border-t border-slate-200 dark:border-slate-700">
                 <p className="text-center text-sm text-slate-600 dark:text-slate-400 mb-4">For Development Only - Quick Logins:</p>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">

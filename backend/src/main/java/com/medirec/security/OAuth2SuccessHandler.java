@@ -3,6 +3,7 @@ package com.medirec.security;
 import com.medirec.entity.User;
 import com.medirec.repository.UserRepository;
 import com.medirec.security.JwtUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -21,6 +22,9 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
     private final UserRepository userRepository;
     private final JwtUtils jwtUtils;
+
+    @Value("${app.frontend.url:http://localhost:3000}")
+    private String frontendUrl;
 
     public OAuth2SuccessHandler(UserRepository userRepository, JwtUtils jwtUtils) {
         this.userRepository = userRepository;
@@ -53,7 +57,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
         String token = jwtUtils.generateJwtToken(authentication);
 
         // Redirect to front-end with token
-        String redirectUrl = "http://localhost:3000/oauth2/redirect?token=" + token;
+        String redirectUrl = frontendUrl + "/oauth2/redirect?token=" + token;
         response.sendRedirect(redirectUrl);
     }
 } 

@@ -25,7 +25,7 @@ const formatDate = (dateString) => {
     if (!dateString) return 'N/A';
     try {
         return new Date(dateString).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
-    } catch (e) {
+    } catch {
         return dateString;
     }
 };
@@ -163,7 +163,7 @@ function DoctorViewPatientProfile() {
     email,
     mobile,
     address,
-    language,
+    // language,
     avatarUrl,
     bloodGroup,
     allergies, // This is Set<String>
@@ -171,12 +171,12 @@ function DoctorViewPatientProfile() {
     insuranceProvider,
     insurancePolicyId,
     insuranceMemberId,
-    profileSetupComplete
+    // profileSetupComplete
   } = patientDetails;
 
   const sectionTitleClass = "text-lg font-semibold text-slate-700 dark:text-slate-200 mb-3 flex items-center justify-between";
   const mutedTextClass = "text-sm text-slate-500 dark:text-slate-400";
-  const valueTextClass = "text-slate-800 dark:text-slate-100";
+  // const valueTextClass = "text-slate-800 dark:text-slate-100";
   const detailItemClass = "py-1";
 
   // EHRViewer might expect specific structured data. For now, pass what's available from PatientProfileDto.

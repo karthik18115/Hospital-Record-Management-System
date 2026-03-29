@@ -5,7 +5,7 @@ import Button from './ui/Button';
 import { EyeIcon as ViewIcon } from './icons'; // Use the View icon
 
 const LabReportViewButton = ({ patientData, labReport, className }) => {
-  const [instance, updateInstance] = usePDF({ 
+  const [instance] = usePDF({ 
     document: <LabResultPdfDocument patientData={patientData} labReport={labReport} /> 
   });
 

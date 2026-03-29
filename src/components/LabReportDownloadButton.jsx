@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { usePDF } from '@react-pdf/renderer';
 import LabResultPdfDocument from './pdf/LabResultPdfDocument';
 import Button from './ui/Button';
 import { DownloadIcon } from './icons';
 
 const LabReportDownloadButton = ({ patientData, labReport, className }) => {
-  const [instance, updateInstance] = usePDF({ 
+  const [instance] = usePDF({ 
     document: <LabResultPdfDocument patientData={patientData} labReport={labReport} /> 
   });
 

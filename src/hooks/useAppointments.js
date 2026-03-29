@@ -23,7 +23,7 @@ function useAppointments() {
           // Use mock data instead of fetch
           setAppointments(MOCK_APPOINTMENTS);
           setIsLoading(false);
-        } catch (err) {
+        } catch {
           setError('Failed to process mock appointment data'); // Should not happen with static mock data
           setIsLoading(false);
         }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { PDFDownloadLink } from '@react-pdf/renderer'; // Restore this import
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -210,7 +210,7 @@ export default function PatientMedicalRecords() {
                     fileName={`LabReport-${report.reportId}-${data?.name?.replace(/\s+/g, '_') || 'Patient'}.pdf`}
                     className="mt-2 sm:mt-0 sm:ml-4 w-full sm:w-auto flex-shrink-0"
                   >
-                    {({ loading: pdfLoading, url, error: pdfError, blob }) => {
+                    {({ loading: pdfLoading }) => {
                       // console.log(`PDFLink for ${report.reportId}: loading=${pdfLoading}, url=${url}, error=${pdfError}, blob size=${blob?.size}`);
                       return (
                         <div 

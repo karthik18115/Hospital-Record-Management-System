@@ -113,7 +113,6 @@ function SignUpPage() {
   };
 
   const handleSignUp = async (e) => {
-    console.log('handleSignUp CALLED');
     e.preventDefault();
     setGeneralError(''); // Clear previous general errors
     setSuccessMessage(''); // Clear previous success messages
@@ -136,7 +135,7 @@ function SignUpPage() {
       
       // Prepare data for the backend
       // Remove confirmPassword; include new professional and 2FA fields
-      const { confirmPassword, ...submissionData } = formData;
+      const { ...submissionData } = formData;
 
       try {
         const response = await fetch('/api/auth/signup', {
@@ -150,7 +149,6 @@ function SignUpPage() {
         const data = await response.json();
 
         if (response.ok) {
-          console.log('Sign up successful:', data);
           // Optionally, log the user in directly or show a success message and redirect to login
           setSuccessMessage(data.message || 'Registration successful! You can now log in.');
           // Redirect to login page after a short delay or after user clicks a button
@@ -177,10 +175,9 @@ function SignUpPage() {
   };
 
   const handleGoogleSignUp = () => {
-    console.log('handleGoogleSignUp CALLED');
-    console.log('Redirecting to Google OAuth...');
     // Redirect the entire window to the backend OAuth2 endpoint
-    window.location.href = 'http://localhost:8081/oauth2/authorization/google';
+    const backendUrl = import.meta.env.VITE_BACKEND_BASE_URL || 'http://localhost:8081';
+    window.location.href = `${backendUrl}/oauth2/authorization/google`;
   };
 
   return (

@@ -2,11 +2,16 @@ package com.medirec.entity;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "messages")
+@Table(name = "messages", indexes = {
+    @Index(name = "idx_message_sender_recipient", columnList = "sender_uuid, recipient_uuid"),
+    @Index(name = "idx_message_timestamp", columnList = "timestamp")
+})
 public class Message {
 
     @Id
@@ -26,7 +31,7 @@ public class Message {
     @JoinColumn(name = "recipient_uuid", nullable = false)
     private User recipient;
 
-    @Lob // For potentially longer messages
+    @Lob
     @Column(name = "content", nullable = false)
     private String content;
 
@@ -35,6 +40,14 @@ public class Message {
 
     @Column(name = "is_read", nullable = false)
     private boolean isRead = false;
+
+    @CreationTimestamp
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(nullable = false)
+    private LocalDateTime updatedAt;
 
     // Constructors
     public Message() {
@@ -87,6 +100,22 @@ public class Message {
 
     public void setRead(boolean read) {
         isRead = read;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @PrePersist

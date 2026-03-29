@@ -48,7 +48,7 @@ const initialUserRoleDistribution = {
 export default function AdminDashboardOverview() {
   const [kpiStats, setKpiStats] = useState(initialKpiStats);
   const [userRoleDistribution, setUserRoleDistribution] = useState(initialUserRoleDistribution);
-  const [adminName, setAdminName] = useState('Admin'); // Placeholder, fetch from auth context ideally
+  const adminName = 'Admin'; // Placeholder, fetch from auth context ideally
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 

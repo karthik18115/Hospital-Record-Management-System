@@ -22,3 +22,16 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment files
+.env
+.env.local
+.env*.local
+
+# Backend build artifacts and IDE files
+backend/target/
+backend/.classpath
+backend/.project
+backend/.settings/
+backend/.vscode/
+

@@ -9,6 +9,7 @@ import com.medirec.dto.SignupRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -25,6 +26,7 @@ import com.medirec.dto.UserRoleStatsDto;
 import java.util.Arrays;
 
 @Service
+@Transactional(readOnly = true)
 public class AdminService {
 
     @Autowired
@@ -40,7 +42,7 @@ public class AdminService {
             user.getName(),
             user.getEmail(),
             user.getRoles(),
-            null // professionalInfo stub
+            null
         );
     }
 
@@ -56,16 +58,17 @@ public class AdminService {
         return mapEntityToDto(user);
     }
 
+    @Transactional
     public UserDto createUser(UserDto dto) {
         User user = new User();
         user.setName(dto.getName());
         user.setEmail(dto.getEmail());
-        // Password and roles assignment omitted (to be handled separately)
         user.setRoles(dto.getRoles());
         userRepository.save(user);
         return mapEntityToDto(user);
     }
 
+    @Transactional
     public UserDto updateUser(UUID uuid, UserDto dto) {
         User user = userRepository.findByUuid(uuid)
             .orElseThrow(() -> new RuntimeException("User not found"));
@@ -76,11 +79,11 @@ public class AdminService {
         return mapEntityToDto(user);
     }
 
+    @Transactional
     public void deleteUser(UUID uuid) {
         userRepository.deleteById(uuid);
     }
 
-    // --- Pending Signup Requests Management ---
     private SignupRequestDto mapToDto(SignupRequest req) {
         return new SignupRequestDto(
             req.getUuid(), req.getFullName(), req.getEmail(), req.getRole(), req.getStatus(), req.getRequestedAt()
@@ -93,6 +96,7 @@ public class AdminService {
             .collect(Collectors.toList());
     }
 
+    @Transactional
     public String approvePendingRequest(UUID uuid) {
         SignupRequest req = signupRequestRepository.findById(uuid)
             .orElseThrow(() -> new RuntimeException("Signup request not found"));
@@ -107,14 +111,10 @@ public class AdminService {
         return "Approved signup for " + req.getFullName();
     }
 
-    // Pending requests and logs methods would go here
-
-    // Admin logs
     public List<LogEntryDto> getLogs() {
         return Collections.emptyList();
     }
 
-    // Admin panels
     public DoctorPanelDto getDoctorPanel() {
         return new DoctorPanelDto(10, 8, 5);
     }
@@ -131,25 +131,24 @@ public class AdminService {
         return new PharmacyPanelDto(200, 20);
     }
 
-    // Admin settings
     public SettingsDto getSettings() {
         return new SettingsDto(false, "support@medirec.com");
     }
 
+    @Transactional
     public SettingsDto updateSettings(SettingsDto dto) {
         return dto;
     }
 
-    // Admin dashboard methods
     public DashboardSummaryDto getDashboardSummaryStats() {
         long pending = signupRequestRepository.findByStatus("PENDING").size();
         return new DashboardSummaryDto(
-            78L,  // activeDoctors (TODO: replace with real count)
-            12L,  // activeLabs
-            23L,  // activePharmacies
+            78L,
+            12L,
+            23L,
             pending,
-            156L,  // loginsToday
-            340L   // dataUploadsToday
+            156L,
+            340L
         );
     }
 

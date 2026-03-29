@@ -14,11 +14,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.Collections;
 import com.medirec.entity.RegistrationStatus;
 import java.util.Set;
 
 @Service
+@Transactional(readOnly = true)
 public class AuthService {
 
     @Autowired
@@ -35,6 +37,7 @@ public class AuthService {
 
     private static final Set<String> ROLES_REQUIRING_APPROVAL = Set.of("ROLE_DOCTOR", "ROLE_PHARMACY", "ROLE_LAB_STAFF");
 
+    @Transactional
     public SignupResponse signup(SignupRequest req) {
         if (userRepository.findByEmail(req.getEmail()).isPresent()) {
             return new SignupResponse(null, "Email already in use");
@@ -95,14 +98,11 @@ public class AuthService {
         SecurityContextHolder.getContext().setAuthentication(auth);
         String token = jwtUtils.generateJwtToken(auth);
         String role = auth.getAuthorities().iterator().next().getAuthority();
-        
-        // Fetch user details for a richer response
-        User authenticatedUser = userRepository.findByEmail(req.getEmail())
-            .orElseThrow(() -> new RuntimeException("Authenticated user not found post-authentication. This should not happen."));
 
-        return new LoginResponse(token, role, authenticatedUser.getUuid().toString(), authenticatedUser.getName(), authenticatedUser.getEmail());
+        return new LoginResponse(token, role, user.getUuid().toString(), user.getName(), user.getEmail());
     }
 
+    @Transactional
     public void updateTwoFactorSecret(String email, String secret) {
         User user = userRepository.findByEmail(email)
             .orElseThrow(() -> new RuntimeException("User not found"));
@@ -116,6 +116,7 @@ public class AuthService {
             .getTwoFactorSecret();
     }
 
+    @Transactional
     public void enableTwoFactor(String email) {
         User user = userRepository.findByEmail(email)
             .orElseThrow(() -> new RuntimeException("User not found"));

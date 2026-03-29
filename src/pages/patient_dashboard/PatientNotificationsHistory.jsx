@@ -11,7 +11,7 @@ import { BellIcon, CheckIcon, TrashIcon } from '../../components/icons'; // Use 
 // const DeleteIcon = () => <span role="img" aria-label="Delete">🗑️</span>;
 
 export default function PatientNotificationsHistory() {
-  const [isLoading, setIsLoading] = useState(false); // Set true for skeleton
+  const [isLoading] = useState(false);
   // Mock data - enhance with more details and types
   const [allNotifications, setAllNotifications] = useState([
     { id: 1, type: 'LAB_RESULT_READY', message: 'Your lab result for Blood Test is ready.', timestamp: '2024-08-10 10:00 AM', isRead: false, link: '/patient/medical-records' },

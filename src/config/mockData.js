@@ -70,7 +70,7 @@ export const MESSAGES_DATA = {
     1: [
       { sender: 'Dr. Smith', content: 'I have reviewed your latest lab results.', timestamp: '2023-05-15T10:30:00', isSent: false },
       { sender: 'You', content: 'What did you find?', timestamp: '2023-05-15T10:32:00', isSent: true },
-      { sender: 'Dr. Smith', content: 'Everything looks normal, but let's discuss in detail.', timestamp: '2023-05-15T10:35:00', isSent: false },
+      { sender: 'Dr. Smith', content: 'Everything looks normal, but let\'s discuss in detail.', timestamp: '2023-05-15T10:35:00', isSent: false },
     ],
     2: [
       { sender: 'Jane Doe', content: 'When will my prescription be ready?', timestamp: '2023-05-14T14:22:00', isSent: false },
@@ -78,11 +78,11 @@ export const MESSAGES_DATA = {
     ],
     3: [
       { sender: 'Dr. Johnson', content: 'Please come in for a follow-up.', timestamp: '2023-05-12T09:15:00', isSent: false },
-      { sender: 'You', content: 'I'll schedule an appointment for next week.', timestamp: '2023-05-12T09:20:00', isSent: true },
+      { sender: 'You', content: 'I\'ll schedule an appointment for next week.', timestamp: '2023-05-12T09:20:00', isSent: true },
     ],
     4: [
       { sender: 'Mike Brown', content: 'Thank you for the advice.', timestamp: '2023-05-10T16:45:00', isSent: false },
-      { sender: 'You', content: 'You're welcome! Let me know if you have any questions.', timestamp: '2023-05-10T16:50:00', isSent: true },
+      { sender: 'You', content: 'You\'re welcome! Let me know if you have any questions.', timestamp: '2023-05-10T16:50:00', isSent: true },
     ],
   },
 };

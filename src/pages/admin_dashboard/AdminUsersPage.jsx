@@ -31,11 +31,10 @@ export default function AdminUsersPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [roleFilter, setRoleFilter] = useState('All');
   const [statusFilter, setStatusFilter] = useState('All');
+  const [forceRefresh, setForceRefresh] = useState(0);
   const [isAddUserModalOpen, setIsAddUserModalOpen] = useState(false);
   const [isEditUserModalOpen, setIsEditUserModalOpen] = useState(false);
   const [currentUserToEdit, setCurrentUserToEdit] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [usersPerPage, setUsersPerPage] = useState(5); // Or a different default
 
   const addUserFormRef = useRef(null);
   const editUserFormRef = useRef(null);
@@ -56,26 +55,11 @@ export default function AdminUsersPage() {
       if (statusFilter !== 'All') {
         filteredUsers = filteredUsers.filter(user => user.status === statusFilter);
       }
-      // Update total users for pagination before slicing
-      // setTotalUsers(filteredUsers.length); // If we need to show total count elsewhere
       setUsers(filteredUsers); // This will now store all filtered users
-      setCurrentPage(1); // Reset to first page on filter change
       setIsLoading(false);
     }, 300);
     return () => clearTimeout(timer);
-  }, [searchTerm, roleFilter, statusFilter]);
-
-  // Pagination Logic
-  const indexOfLastUser = currentPage * usersPerPage;
-  const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentUsersToDisplay = users.slice(indexOfFirstUser, indexOfLastUser);
-  const totalPages = Math.ceil(users.length / usersPerPage);
-
-  const paginate = (pageNumber) => {
-    if (pageNumber >= 1 && pageNumber <= totalPages) {
-      setCurrentPage(pageNumber);
-    }
-  };
+  }, [searchTerm, roleFilter, statusFilter, forceRefresh]);
 
   const openEditUserModal = (userId) => {
     const userToEdit = mockUsers.find(user => user.id === userId);
@@ -93,7 +77,6 @@ export default function AdminUsersPage() {
   };
 
   const handleSaveUpdatedUser = (updatedUserData) => {
-    console.log('Updating user:', updatedUserData);
     setIsProcessing(true);
     setTimeout(() => {
       mockUsers = mockUsers.map(user => 
@@ -105,10 +88,8 @@ export default function AdminUsersPage() {
             }
           : user
       );
-      // setUsers(mockUsers); // This line will be updated by the useEffect for filters
-      // Instead of setUsers directly, trigger the filter useEffect to re-evaluate
-      // by slightly changing one of its dependencies. This ensures pagination and filters re-apply.
-      setSearchTerm(prev => prev + ' '.slice(0,Math.random() > 0.5 ? 0 : 1)); // a bit hacky, but forces re-filter
+      // Trigger filter refresh using explicit forceRefresh counter
+      setForceRefresh(prev => prev + 1);
       setIsProcessing(false);
       closeEditUserModal();
       // TODO: Add success toast for user update
@@ -124,7 +105,6 @@ export default function AdminUsersPage() {
     if (user.status === 'Pending') {
       if (user.role === 'Patient') {
         newStatus = 'Active';
-        console.log(`Approving Patient: ${userId}. Status changed to Active.`);
       } else {
         // For non-patient roles, direct activation from here is discouraged.
         // Admin should use the Edit form to fill details and approve.
@@ -141,15 +121,14 @@ export default function AdminUsersPage() {
     mockUsers = mockUsers.map(u => 
       u.id === userId ? { ...u, status: newStatus } : u
     );
-    // Trigger re-render/re-filter by updating a state that useEffect depends on
-    setSearchTerm(prev => prev + ' '.slice(0,Math.random() > 0.5 ? 0 : 1)); 
+    // Trigger filter refresh using explicit forceRefresh counter
+    setForceRefresh(prev => prev + 1);
   };
   
   const openAddUserModal = () => setIsAddUserModalOpen(true);
   const closeAddUserModal = () => setIsAddUserModalOpen(false);
 
   const handleSaveNewUser = (newUserData) => {
-    console.log('Saving new user:', newUserData);
     setIsProcessing(true);
     setTimeout(() => {
       const newUser = {
@@ -163,8 +142,8 @@ export default function AdminUsersPage() {
         avatar: `https://ui-avatars.com/api/?name=${newUserData.name.replace(' ', '+')}&background=random&color=fff`,
       };
       mockUsers = [newUser, ...mockUsers];
-      // setUsers(mockUsers); // Similar to edit, let filters update the view
-      setSearchTerm(prev => prev + ' '.slice(0,Math.random() > 0.5 ? 0 : 1));
+      // Trigger filter refresh using explicit forceRefresh counter
+      setForceRefresh(prev => prev + 1);
       setIsProcessing(false);
       closeAddUserModal();
       // TODO: Add success toast for user creation

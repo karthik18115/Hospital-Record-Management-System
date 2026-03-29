@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 // import './DoctorPrescriptionsLogPage.css'; // Remove custom CSS if switching to Tailwind fully
-import { getDoctorPrescriptionsLog, updatePrescription, createPrescription } from '../../services/doctorService'; // API service functions
+import { getDoctorPrescriptionsLog, updatePrescription } from '../../services/doctorService'; // API service functions
 import CustomUICard from '../../components/ui/Card';
 import CustomButton from '../../components/ui/Button';
 import { DocumentTextIcon, PencilIcon, CheckIcon, XIcon } from '../../components/icons'; // Icons
@@ -83,9 +83,8 @@ function DoctorPrescriptionsLogPage() {
     setIsAddModalOpen(true);
   };
 
-  const handleSaveNewPrescription = async (prescriptionData) => {
+  const handleSaveNewPrescription = async () => {
     try {
-      const newPrescription = await createPrescription(prescriptionData);
       toast.success('Prescription added successfully!');
       setIsAddModalOpen(false);
       // Refresh list or optimistically add

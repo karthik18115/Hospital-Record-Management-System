@@ -28,7 +28,7 @@ const mockPharmacyData = {
 };
 
 export default function PharmacyDashboardOverview() {
-  const [data, setData] = useState(mockPharmacyData);
+  const [data] = useState(mockPharmacyData);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -61,10 +61,10 @@ export default function PharmacyDashboardOverview() {
   ];
 
   const quickActionsData = [
-    { label: 'Verify Prescription', icon: <NotesIcon />, onClick: () => console.log('Verify New Prescription'), variant: 'primary'},
-    { label: 'Process Refills', icon: <RefillIcon />, onClick: () => console.log('Process Refill Requests'), variant: 'secondary'},
-    { label: 'Drug Interactions', icon: <AlertIcon />, onClick: () => console.log('Check Drug Interactions'), variant: 'secondary'},
-    { label: 'Manage Inventory', icon: <InventoryIcon />, onClick: () => console.log('Manage Inventory'), variant: 'secondary'},
+    { label: 'Verify Prescription', icon: <NotesIcon />, onClick: () => {}, variant: 'primary'},
+    { label: 'Process Refills', icon: <RefillIcon />, onClick: () => {}, variant: 'secondary'},
+    { label: 'Drug Interactions', icon: <AlertIcon />, onClick: () => {}, variant: 'secondary'},
+    { label: 'Manage Inventory', icon: <InventoryIcon />, onClick: () => {}, variant: 'secondary'},
   ];
 
   return (

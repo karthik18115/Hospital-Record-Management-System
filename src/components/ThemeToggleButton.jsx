@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTheme } from '../context/ThemeContext';
+import { useTheme } from '../context/useTheme';
 import './ThemeToggleButton.css'; // Create this CSS file next
 
 // Simple text-based icons for now. Consider using an icon library later.
